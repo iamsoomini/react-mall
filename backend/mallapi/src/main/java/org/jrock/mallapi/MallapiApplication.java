@@ -11,4 +11,6 @@ public class MallapiApplication {
 		SpringApplication.run(MallapiApplication.class, args);
 	}
 
+
+
 }
