@@ -7,6 +7,7 @@ const BasicMenu = () => {
         <ul className="flex p-4 text-white font-bold">
           <li className="pr-6 text-2xl">
             {" "}
+            {/* a 태그가 아닌 Link 태그를 사용해야 함. */}
             <Link to={"/"}>Main</Link>{" "}
           </li>
           <li className="pr-6 text-2xl">
