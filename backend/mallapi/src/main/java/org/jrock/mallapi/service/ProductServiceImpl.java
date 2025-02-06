@@ -65,4 +65,44 @@ public class ProductServiceImpl implements ProductService {
                 .pageRequestDto(pageRequestDto)
                 .build();
     }
+
+    @Override
+    public Long register(ProductDTO productDTO) {
+
+        Product product = dtoToEntity(productDTO);
+
+        log.info("------------------");
+
+        Long pno = productRepository.save(product).getPno();
+
+        return pno;
+    }
+
+    //외부에서 사용 안할거니까 private
+    //포인트는 '컬렉션 처리' 엔티티안의 컬렉션은 새로 만드는게 아님.
+    private Product dtoToEntity(ProductDTO productDTO){
+
+        Product product = Product.builder()
+                .pno(productDTO.getPno())
+                .pname(productDTO.getPname())
+                .pdesc(productDTO.getPdesc())
+                .price(productDTO.getPrice())
+                .build();
+
+        List<String> uploadedFileNames = productDTO.getUploadedFileNames();
+
+        if(uploadedFileNames == null || uploadedFileNames.isEmpty()){
+            return product;
+        }
+
+        uploadedFileNames.forEach(fileName -> {
+
+            product.addImageString(fileName);
+            //새로운 객체 만들지 않고 기존에 만들어놓은 함수를 사용
+        });
+
+
+        return product;
+    }
+
 }

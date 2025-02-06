@@ -12,4 +12,6 @@ public interface ProductService {
 
     PageResponseDto<ProductDTO> getList(PageRequestDto pageRequestDto);
 
+
+
 }
